@@ -1,0 +1,25 @@
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UserModule } from './user/user.module';
+import { ExpenseModule } from './expense/expense.module';
+import { CategoryModule } from './category/category.module';
+import { AccountsController } from './accounts/accounts.controller';
+import { AccountsService } from './accounts/accounts.service';
+import { AccountsModule } from './accounts/accounts.module';
+
+
+@Module({
+  controllers: [AppController],
+  providers: [AppService],
+
+  imports: [
+    MongooseModule.forRoot(process.env.MONGODB_URI ?? 'mongodb://localhost:27017/expense-db'),
+    UserModule,
+    ExpenseModule,
+    CategoryModule,
+    AccountsModule,
+  ],
+})
+export class AppModule {}
