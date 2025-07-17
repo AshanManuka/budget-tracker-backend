@@ -12,6 +12,9 @@ import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtService } from '@nestjs/jwt';
+import { IncomeController } from './income/income.controller';
+import { IncomeService } from './income/income.service';
+import { IncomeModule } from './income/income.module';
 
 
 @Module({
@@ -25,6 +28,7 @@ import { JwtService } from '@nestjs/jwt';
     CategoryModule,
     AccountsModule,
     AuthModule,
+    IncomeModule,
   ],
 })
 export class AppModule {}

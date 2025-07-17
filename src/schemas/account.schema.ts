@@ -19,7 +19,7 @@ export class Account{
     @Prop()
     investmentBalance: number;
 
-    @Prop({required: true, type: [{type : Types.ObjectId, ref: 'User'}] })
+    @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
     userId: string;
 
 }

@@ -2,8 +2,7 @@ import { IsNotEmpty, IsString } from 'class-validator';
 import { Income } from 'src/schemas/income.schema';
 
 export class CreateIncomeDto {
-    
-    @IsNotEmpty()
+   @IsNotEmpty()
     amount: number;
     
     @IsNotEmpty()
@@ -14,5 +13,5 @@ export class CreateIncomeDto {
     date: Date;
 
     @IsNotEmpty()
-    categoryId: string;
+    categoryId: string; 
 }
