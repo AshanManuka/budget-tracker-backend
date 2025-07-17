@@ -19,7 +19,12 @@ export class InvestmentService {
         if(account.savingsBalance < investmentDto.amount){
             return "Not Enough Balance";
         }else{
-            const investment = new this.investmentModel(investmentDto);
+            const fullInvestment = {
+                ...investmentDto,
+                userId: uId,
+            }
+
+            const investment = new this.investmentModel(fullInvestment);
             const savedInvestment = investment.save();
 
             return await this.accountService.deductForInvestment(uId, investmentDto.amount)

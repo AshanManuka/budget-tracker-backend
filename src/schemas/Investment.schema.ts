@@ -1,4 +1,5 @@
 import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
+import { Types } from 'mongoose'
 
 export type InvestmentDocument = Investment & Document;
 
@@ -16,6 +17,9 @@ export class Investment{
     
     @Prop({required : true})
     startDate : Date;
+
+    @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
+    userId: string;
 
 }
 

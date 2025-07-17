@@ -15,6 +15,9 @@ export class Expense {
     @Prop({ required: true })
     date: Date;
 
+    @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
+    userId: string;
+
     @Prop({ required: true , type: [{type : Types.ObjectId, ref: 'Category'}]})
     categoryId: string;
 

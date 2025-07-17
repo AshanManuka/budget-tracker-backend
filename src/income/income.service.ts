@@ -15,7 +15,11 @@ export class IncomeService {
 
     
     async createIncome(createIncomeDto: CreateIncomeDto, userPayload: { userId: string; email: string } ) {
-         const createdIncome = new this.incomeModel(createIncomeDto);
+         const fullIncome = {
+            ...createIncomeDto,
+            userId : userPayload.userId
+         }
+        const createdIncome = new this.incomeModel(fullIncome);
          createdIncome.save();
 
         return await this.accountService.increaseBalance(createIncomeDto.amount, userPayload.userId);
