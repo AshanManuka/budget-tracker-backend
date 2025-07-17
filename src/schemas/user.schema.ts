@@ -12,6 +12,9 @@ export class User{
     @Prop({required: true})
     name: String;
 
+    @Prop({required: true})
+    password: String;
+
     @Prop()
     description: String;
 

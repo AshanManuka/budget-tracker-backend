@@ -8,10 +8,14 @@ import { CategoryModule } from './category/category.module';
 import { AccountsController } from './accounts/accounts.controller';
 import { AccountsService } from './accounts/accounts.service';
 import { AccountsModule } from './accounts/accounts.module';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
+import { JwtService } from '@nestjs/jwt';
 
 
 @Module({
-  controllers: [AppController],
+  controllers: [AppController, AuthController],
   providers: [AppService],
 
   imports: [
@@ -20,6 +24,7 @@ import { AccountsModule } from './accounts/accounts.module';
     ExpenseModule,
     CategoryModule,
     AccountsModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
