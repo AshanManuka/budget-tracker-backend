@@ -1,0 +1,20 @@
+import { Controller, UseGuards, Post, Body, Request } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { InvestmentService } from './investment.service';
+import { createInvestmentDto } from 'src/dto/create-insvestment';
+
+@Controller('investment')
+@UseGuards(AuthGuard('jwt'))
+export class InvestmentController {
+
+    constructor( private readonly investmentService: InvestmentService){}
+
+    @Post('create-investment')
+    async createInvestment(@Body() createInvestmentDto : createInvestmentDto, @Request() req){
+        const userPayload: { userId: string; email: string } = req.user;
+        return await this.investmentService.createInvestment(createInvestmentDto, userPayload.userId);
+    }
+
+
+
+}

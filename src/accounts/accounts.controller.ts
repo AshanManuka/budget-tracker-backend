@@ -10,7 +10,8 @@ export class AccountsController {
 
     @Get("current-balance")
     async getAccountBalance(@Request() req){
-        return await this.accountService.getAccountBalance(req.user);
+        const userPayload: { userId: string; email: string } = req.user;
+        return await this.accountService.getAccountBalance(userPayload.userId);
     }
 
 }

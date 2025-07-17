@@ -15,6 +15,7 @@ import { JwtService } from '@nestjs/jwt';
 import { IncomeController } from './income/income.controller';
 import { IncomeService } from './income/income.service';
 import { IncomeModule } from './income/income.module';
+import { InvestmentModule } from './investment/investment.module';
 
 
 @Module({
@@ -29,6 +30,7 @@ import { IncomeModule } from './income/income.module';
     AccountsModule,
     AuthModule,
     IncomeModule,
+    InvestmentModule,
   ],
 })
 export class AppModule {}

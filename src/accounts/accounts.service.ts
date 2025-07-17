@@ -23,6 +23,7 @@ export class AccountsService {
         const createdAccount = await this.accountModel.create(accountDto);
         return createdAccount;
     }
+    
 
     async increaseBalance(amount: number, userId: string) {
        
@@ -42,12 +43,38 @@ export class AccountsService {
         };
     }
 
-    async getAccountBalance(userPayload: { userId: string; email: string }){
-        const accountBalance = await this.accountModel.findOne(
-            {userId : userPayload.userId}
+    async deductForInvestment(uId: string, amount: number) {
+        const updatedAccount = await this.accountModel.findOneAndUpdate(
+            { userId: uId },
+            { 
+            $inc: { 
+                savingsBalance: -amount, 
+                investmentBalance: amount 
+            }
+            },
+            { new: true }
         );
-        return accountBalance;
+
+        if (!updatedAccount) {
+            throw new NotFoundException('Account not found for the given user');
+        }
+
+        return {
+            message: 'Balances updated successfully',
+            account: updatedAccount
+        };
     }
+
+
+
+    async getAccountBalance(uId: string): Promise<AccountDocument> {
+        const account = await this.accountModel.findOne({ userId: uId });
+        if (!account) {
+            throw new NotFoundException('Account not found for this user');
+        }
+        return account;
+    }
+
 
 
 

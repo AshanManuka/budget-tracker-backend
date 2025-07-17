@@ -13,6 +13,7 @@ export class IncomeService {
         private readonly accountService: AccountsService,
     ){}
 
+    
     async createIncome(createIncomeDto: CreateIncomeDto, userPayload: { userId: string; email: string } ) {
          const createdIncome = new this.incomeModel(createIncomeDto);
          createdIncome.save();
