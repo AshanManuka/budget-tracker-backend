@@ -42,6 +42,13 @@ export class AccountsService {
         };
     }
 
+    async getAccountBalance(userPayload: { userId: string; email: string }){
+        const accountBalance = await this.accountModel.findOne(
+            {userId : userPayload.userId}
+        );
+        return accountBalance;
+    }
+
 
 
 
