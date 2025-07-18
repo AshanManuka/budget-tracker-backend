@@ -1,6 +1,6 @@
 import { Schema } from "@nestjs/mongoose";
 import { Prop, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export type CreditDocument = Credit & Document;
 
@@ -20,6 +20,9 @@ export class Credit{
 
     @Prop()
     status: String;
+
+    @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
+    userId: string;
 }
 
 export const CreditSchema = SchemaFactory.createForClass(Credit);

@@ -75,6 +75,39 @@ export class AccountsService {
         return account;
     }
 
+    async addToCreditBalance(amount:number, uId: string){
+        const updatedAccount = await this.accountModel.findOneAndUpdate(
+            {userId: uId},
+            {
+                $inc: {creditBalance: amount} 
+            },
+            {new: true}
+        );
+
+        if (!updatedAccount) {
+            throw new NotFoundException('Account not found for the given user');
+        }
+
+        return "Credit updated successfully";
+    }
+
+    async deductFromCreditBalance(amount: number, uId: string){
+        const updatedAccount = await this.accountModel.findOneAndUpdate(
+            {userId: uId},
+            {
+                $inc: {creditBalance: -amount} 
+            },
+            {new: true}
+        );
+
+        if (!updatedAccount) {
+            throw new NotFoundException('Account not found for the given user');
+        }
+
+        return "Credit updated successfully";
+
+    }
+
 
 
 

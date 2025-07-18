@@ -8,6 +8,7 @@ import { AccountsModule } from 'src/accounts/accounts.module';
 @Module({
   controllers: [ExpenseController],
   providers: [ExpenseService],
+  exports: [ExpenseService],
   imports: [
     MongooseModule.forFeature([{ name: Expense.name, schema: ExpenseSchema }]),
     AccountsModule
