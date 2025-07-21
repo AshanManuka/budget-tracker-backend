@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateExpenseDto } from 'src/dto/create-expense';
 import { AccountsService } from 'src/accounts/accounts.service';
+import { startOfMonth, endOfMonth } from 'date-fns';
 
 @Injectable()
 export class ExpenseService {
@@ -27,5 +28,27 @@ export class ExpenseService {
 
     async allExpense(userPayload: {userId: string, email: string}){
         return await this.expenseModel.find({userId: userPayload.userId}).sort({date: -1});
+    }
+
+    async getCurrentMonthTotal(userPayload: { userId: string; email: string }) {
+        const start = startOfMonth(new Date());
+        const end = endOfMonth(new Date());
+
+        const result = await this.expenseModel.aggregate([
+            {
+            $match: {
+                date: { $gte: start, $lte: end },
+                userId: userPayload.userId,
+            },
+            },
+            {
+            $group: {
+                _id: null,
+                total: { $sum: '$amount' },
+            },
+            },
+        ]);
+
+        return { total: result[0]?.total || 0 };
     }
 }

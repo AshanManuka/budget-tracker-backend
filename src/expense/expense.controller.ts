@@ -21,6 +21,11 @@ export class ExpenseController {
         return this.expenseService.allExpense(req.user);
     }
 
+    @Get('current-month-total')
+    async getCurrentMonthTotalExpense(@Request() req){
+        return this.expenseService.getCurrentMonthTotal(req.user);
+    }
+
 
 
 }
