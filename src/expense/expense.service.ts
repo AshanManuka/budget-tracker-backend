@@ -23,7 +23,9 @@ export class ExpenseService {
         await createdExpense.save();
         
         return await this.accoutService.increaseBalance(-createExpenseDto.amount, uId);
+    }
 
-    
+    async allExpense(userPayload: {userId: string, email: string}){
+        return await this.expenseModel.find({userId: userPayload.userId}).sort({date: -1});
     }
 }

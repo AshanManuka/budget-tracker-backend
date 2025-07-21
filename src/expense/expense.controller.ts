@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Request, UseFilters, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Request, Get, UseGuards } from '@nestjs/common';
 import { ExpenseService } from './expense.service';
 import { CreateExpenseDto } from '../dto/create-expense';
 import { Expense } from 'src/schemas/expense.schema';
@@ -14,6 +14,11 @@ export class ExpenseController {
     async create(@Body() createExpenseDto: CreateExpenseDto, @Request() req) {
         const userPayload: { userId: string; email: string } = req.user;
         return this.expenseService.createExpense(createExpenseDto, userPayload.userId);
+    }
+
+    @Get('all')
+    async getAllExpense(@Request() req){
+        return this.expenseService.allExpense(req.user);
     }
 
 

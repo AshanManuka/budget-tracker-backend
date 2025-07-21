@@ -25,4 +25,9 @@ export class IncomeService {
         return await this.accountService.increaseBalance(createIncomeDto.amount, userPayload.userId);
 
     }
+
+    async getAllIncome(userPayload: { userId: string; email: string }) {
+        return this.incomeModel.find({userId: userPayload.userId}).sort({ date: -1 });
+    }
+
 }

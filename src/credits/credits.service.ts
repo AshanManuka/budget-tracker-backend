@@ -32,7 +32,8 @@ export class CreditsService {
 
     async getAllCreditByUser(userPayload: {email: string, userId: string}){
         return this.creditModel.find({
-            userId: userPayload.userId
+            userId: userPayload.userId,
+            status: 'Not Settled'
         })
     }
 
