@@ -22,6 +22,8 @@ export class InvestmentService {
             const fullInvestment = {
                 ...investmentDto,
                 userId: uId,
+                clodeDate: null,
+                status: "ACTIVE",
             }
 
             const investment = new this.investmentModel(fullInvestment);
@@ -29,6 +31,12 @@ export class InvestmentService {
 
             return await this.accountService.deductForInvestment(uId, investmentDto.amount)
         }
+    }
+
+    async getAllInvestmentByUser(userPayload: {userId: string, email: string}){
+        return await this.investmentModel.find({
+            userId: userPayload.userId
+        }).sort({date: -1});
     }
     
 

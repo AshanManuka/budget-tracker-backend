@@ -1,4 +1,4 @@
-import { Controller, UseGuards, Post, Body, Request } from '@nestjs/common';
+import { Controller, UseGuards, Post, Body, Get, Request } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { InvestmentService } from './investment.service';
 import { createInvestmentDto } from 'src/dto/create-insvestment';
@@ -13,6 +13,11 @@ export class InvestmentController {
     async createInvestment(@Body() createInvestmentDto : createInvestmentDto, @Request() req){
         const userPayload: { userId: string; email: string } = req.user;
         return await this.investmentService.createInvestment(createInvestmentDto, userPayload.userId);
+    }
+
+    @Get('all')
+    async getAllInvestments(@Request() req){
+        return await this.investmentService.getAllInvestmentByUser(req.user);
     }
 
 

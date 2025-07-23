@@ -32,16 +32,17 @@ export class CreditsService {
 
     async getAllCreditByUser(userPayload: {email: string, userId: string}){
         return this.creditModel.find({
-            userId: userPayload.userId,
-            status: 'Not Settled'
-        })
+            userId: userPayload.userId
+        }).sort({ dueDate: -1 });
     }
 
 
     async settleLoan(loanId: string, userPayload: { email: string; userId: string }) {
         const updatedLoan = await this.creditModel.findByIdAndUpdate(
             loanId,
-            { status: "Settled" },
+            { status: "Settled",
+              settleDate: new Date(),
+             },
             { new: true }
         );
 

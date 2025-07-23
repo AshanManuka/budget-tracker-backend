@@ -18,6 +18,12 @@ export class Investment{
     @Prop({required : true})
     startDate : Date;
 
+    @Prop()
+    clodeDate : Date;
+
+    @Prop({required: true})
+    status: string;
+
     @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
     userId: string;
 

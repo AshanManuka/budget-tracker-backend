@@ -19,6 +19,9 @@ export class Credit{
     dueDate: Date;
 
     @Prop()
+    settledDate: Date;
+
+    @Prop()
     status: String;
 
     @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
