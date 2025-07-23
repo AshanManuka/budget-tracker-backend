@@ -36,7 +36,7 @@ export class InvestmentService {
     async getAllInvestmentByUser(userPayload: {userId: string, email: string}){
         return await this.investmentModel.find({
             userId: userPayload.userId
-        }).sort({date: -1});
+        }).sort({startDate: -1});
     }
     
 
