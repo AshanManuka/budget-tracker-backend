@@ -109,6 +109,23 @@ export class AccountsService {
     }
 
 
+// issue
+    async closeInvestment(uId: string, investedAmount: number, interest: number) {
+  return await this.accountModel.findOneAndUpdate(
+    { userId: uId },  // filter by userId
+    {
+      $inc: {
+        mainBalance: interest,
+        savingsBalance: investedAmount + interest,
+        investmentBalance: -investedAmount,
+      },
+    },
+    { new: true }
+  );
+}
+
+
+
 
 
 

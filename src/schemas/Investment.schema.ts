@@ -21,6 +21,9 @@ export class Investment{
     @Prop()
     clodeDate : Date;
 
+    @Prop()
+    interest: number;
+
     @Prop({required: true})
     status: string;
 

@@ -8,10 +8,10 @@ import { AccountsModule } from 'src/accounts/accounts.module';
 @Module({
     controllers: [IncomeController],
     providers: [IncomeService],
+    exports: [IncomeService],
     imports: [
         MongooseModule.forFeature([{ name: Income.name, schema: IncomeSchema }]),
         AccountsModule,
-        
     ],
 })
 export class IncomeModule {}
