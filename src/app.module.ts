@@ -17,6 +17,7 @@ import { IncomeService } from './income/income.service';
 import { IncomeModule } from './income/income.module';
 import { InvestmentModule } from './investment/investment.module';
 import { CreditsModule } from './credits/credits.module';
+import { InstallmentModule } from './installment/installment.module';
 
 
 @Module({
@@ -33,6 +34,7 @@ import { CreditsModule } from './credits/credits.module';
     IncomeModule,
     InvestmentModule,
     CreditsModule,
+    InstallmentModule,
   ],
 })
 export class AppModule {}

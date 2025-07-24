@@ -26,6 +26,11 @@ export class CreditsController {
         return await this.creditsService.settleLoan(body.loanId, req.user);
     }
 
+    @Post('settle-installment')
+    async settleInstallment(@Body() reqBody: {lId: string, installmentAmount: number}, @Request() req){
+        return await this.creditsService.settleInstallment(reqBody.lId, reqBody.installmentAmount, req.user);
+    }
+
 
 
 

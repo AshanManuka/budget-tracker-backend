@@ -24,6 +24,9 @@ export class Credit{
     @Prop()
     status: String;
 
+    @Prop()
+    installment: number;
+
     @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
     userId: string;
 }
