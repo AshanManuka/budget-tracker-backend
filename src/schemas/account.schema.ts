@@ -19,6 +19,9 @@ export class Account{
     @Prop()
     investmentBalance: number;
 
+    @Prop()
+    plannedBudget: number;
+
     @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
     userId: string;
 

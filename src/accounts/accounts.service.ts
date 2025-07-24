@@ -123,6 +123,16 @@ export class AccountsService {
     );
     }
 
+    async updatePlanBalance(amount: number, uId: string){
+        return await this.accountModel.findOneAndUpdate(
+            {userId: uId},
+            {
+                $inc: {plannedBudget: amount}
+            },
+            {new: true}
+        );
+    }
+
 
 
 
