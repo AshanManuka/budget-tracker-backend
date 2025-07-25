@@ -20,6 +20,11 @@ export class PlanController {
         return await this.planService.getAllPlansByUser(req.user);
     }
 
+    @Post('remove')
+    async removePlan(@Body('planId') planId: string, @Request() req){
+        return await this.planService.removePlan(planId, req.user);
+    }
+
 
 
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreatePlanDto } from 'src/dto/create-plan';
 import { Plan } from 'src/schemas/plan.schema';
@@ -35,6 +35,23 @@ export class PlanService {
             userId: userPayload.userId
         });
     }
+
+
+    async removePlan(planId: string, userPayload: { userId: string; email: string }) {
+        const removedPlan: any = await this.planModel.findByIdAndDelete(planId).exec();
+
+        if (!removedPlan) {
+            throw new NotFoundException(`Plan with ID ${planId} not found`);
+        }
+
+
+
+        return await this.accountService.updatePlanBalance(
+            -removedPlan.estimatePrice,
+            userPayload.userId
+        );
+    }
+
 
 
 }
