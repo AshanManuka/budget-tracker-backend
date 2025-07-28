@@ -51,4 +51,37 @@ export class ExpenseService {
 
         return { total: result[0]?.total || 0 };
     }
+
+
+
+    async getByDateRange(
+        ranges: { startDate: Date; endDate: Date },
+        userPayload: { userId: string; email: string }
+        ) {
+        return await this.expenseModel.find({
+            userId: userPayload.userId,
+            date: {
+            $gte: ranges.startDate,
+            $lte: ranges.endDate
+            }
+        });
+    }
+
+
+    async getByKeyword(keyword: string, userPayload: { userId: string; email: string }) {
+        return await this.expenseModel.find({
+            userId: userPayload.userId,
+            reason: { $regex: keyword, $options: "i" }  // "i" = case-insensitive
+        }).sort({ date: -1 });
+    }
+
+
+
+
+
+
+
+
+
+
 }

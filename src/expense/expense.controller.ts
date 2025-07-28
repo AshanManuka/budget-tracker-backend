@@ -26,6 +26,16 @@ export class ExpenseController {
         return this.expenseService.getCurrentMonthTotal(req.user);
     }
 
+    @Get('date-range')
+    async getByDateRange(@Body() dateRange: any, @Request() req){
+        return await this.expenseService.getByDateRange(dateRange, req.user);
+    }
+
+    @Post('by-keyword')
+    async getByKeyword(@Body() keyword: any, @Request() req){
+        return await this.expenseService.getByKeyword(keyword.word, req.user);
+    }
+
 
 
 }
