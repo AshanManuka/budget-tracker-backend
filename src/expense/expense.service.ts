@@ -75,11 +75,22 @@ export class ExpenseService {
         }).sort({ date: -1 });
     }
 
-
-
-
-
-
+    async getTotalExpensesByDateRange(start, end, userPayload: { userId: string; email: string }) {
+        return await this.expenseModel.aggregate([
+            {
+                $match: {
+                    date: { $gte: new Date(start), $lte: new Date(end) },
+                    userId: userPayload.userId,
+                },
+            },
+            {
+                $group: {
+                    _id: null,
+                    total: { $sum: '$amount' },
+                },
+            },
+        ]);
+    }
 
 
 
